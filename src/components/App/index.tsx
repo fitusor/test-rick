@@ -1,11 +1,12 @@
 import Gallery from '../Gallery';
-import { FC } from "react";
+import { FC } from 'react';
 import '../../styles/global.css';
+import Title from '../Title';
 
 const Main: FC = () => {
   return (
     <div className="Main">
-      <h1>Rick and Morty Character Gallery</h1>
+      <Title />
       <Gallery />
     </div>
   );

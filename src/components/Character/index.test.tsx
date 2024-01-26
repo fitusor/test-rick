@@ -1,11 +1,21 @@
 import React from 'react';
-import Title from './index';
+import Character from './index';
 import { render, screen } from '@testing-library/react';
 
-describe('<Title/>', () => {
-  test('should render title', () => {
-    render(<Title />);
+const character = {
+  image: 'test',
+  name: 'test',
+};
 
-    expect(screen.getByTestId('title')).toHaveTextContent('Rick and Morty Character Gallery');
+describe('<Character />', () => {
+  test('should render name', () => {
+    render(<Character character={character} />);
+
+    expect(screen.getByTestId('character-name')).toHaveTextContent(character.name);
+  });
+  test('should render image', () => {
+    render(<Character character={character} />);
+
+    expect(screen.getByAltText(character.name)).toBeVisible();
   });
 });

@@ -1,21 +1,30 @@
 import React from 'react';
-import Character from './index';
+import CharactersList from './index';
 import { render, screen } from '@testing-library/react';
 
-const character = {
-  image: 'test',
-  name: 'test',
-};
+const characters = [
+  {
+    image: 'test',
+    name: 'test',
+    id: 1,
+  },
+  {
+    image: 'test',
+    name: 'test',
+    id: 2,
+  },
+];
 
 describe('<Character />', () => {
-  test('should render name', () => {
-    render(<Character character={character} />);
+  test('should not render empty array', () => {
+    render(<CharactersList characters={[]} />);
 
-    expect(screen.getByTestId('character-name')).toHaveTextContent(character.name);
+    expect(screen.queryByTestId(/characterItem-/)).not.toBeInTheDocument();
   });
-  test('should render image', () => {
-    render(<Character character={character} />);
+  test('should not render empty array', () => {
+    render(<CharactersList characters={characters} />);
 
-    expect(screen.getByAltText(character.name)).toBeVisible();
+    expect(screen.getAllByTestId(/characterItem-/)).toHaveLength(2);
   });
+  /*Сделать на 1 элементов*/
 });

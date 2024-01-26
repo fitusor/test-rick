@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+1. [Pre-requirements](#1-pre-requirements)
+## 1. Pre-requirements
+- node: +18 - latest
+- yarn: +1.18 ~ latest
+2. [Project setup and running](#2-project-setup-and-running)
+## 2. Project setup and running
+clone repository with ssh (git@)
+#### 2.1 `yarn` commands
+- `yarn install` install the dependencies in the local node_modules folder
+- `yarn dev` build a development version of the project and start dev server on localhost:3000
+- `yarn build` build a development version of the project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### 2.2 `husky` with these hooks is configured on the project:
+`husky install` - Enables Git hooks
 
-## Available Scripts
+Husky hooks configuration is located in the root directory, in the `.husky` folder
+- `pre-commit` uses `yarn lint` , `yarn test:unit` , `yarn tsc
+4. [Tech design](#4-tech-design)
+### Structure quick overview.
+- package.json - Managing the project's dependencies, scripts, version, etc.
+- tsconfig.json - Specifies the root files, and the compiler options required to compile the project.
+- .prettierrc - Configuration file for Prettier.
+- .eslintrc.json - Configuration file for ESLint.
+- src/ - Contains all of our react codebase.
+- src/app - Routing components.
+- src/components - Base components.
+- src/constants/ - Common project constants.
+- src/helpers/ - Common project utils.
+- src/images/ - Image components & static images.
+- src/interfaces/ - TypeScript types or interfaces for common components.
+- src/layouts/ - Layouts for next templates.
+- src/services/ - General API services.
 
-In the project directory, you can run:
+The folder structure of each component should look like this:
+SomeComponent/
+|-- index.tsx
+|-- index.test.tsx
+|-- styles.module.css
+5. [Tech stack](#5-tech-stack)
+#### 5. Tech stack
+SPA(single page application)
 
-### `npm start`
+Javascript - [Typescript](https://www.typescriptlang.org/), [React](https://react.dev/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Styling - [CSS](https://www.w3schools.com/css/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+APIs - Axios
 
-### `npm test`
+Markup - [Next.js](https://nextjs.org/)
+6. [Testing](#6-testing)
+7. ### 6. Testing
+To run tests locally, please run the following commands:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+yarn test:unit - runs unit tests
+yarn test - runs typescript checks , unit tests , e2e tests
 
-### `npm run build`
+Unit testing
+packages: [Jest](https://jestjs.io/) | testing-library/react | testing-library/jest-dom | jest-environment-jsdom
+7. [Project code style](#7-project-code-style)
+8. #### 7. Project code style
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The project uses _Airbnb React/JSX Style Guide_ [for React](https://airbnb.io/javascript/react/) and prettier
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before the deployment on servers all source code should be checked using the .eslintrc config
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 7.1 Code style settings
 
-### `npm run eject`
+- Set line separators
+    1. Set line separator in IDE to \n.\
+       Ex. for PhpStorm/WebStorm set Editor | Code Style | Line separator to Unix and OS X (\n)
+    2. Set line separator in Git by command git config core.autocrlf input
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Configure absolute paths in projects
+    1. PhpStorm/Webstorm: Right-click on src folder and choose Mark Directory As | Resource Root
+    2. PhpStorm/Webstorm: go to Settings | Editor | Code Style | JavaScript, choose Imports tab and tick Use paths relative to the project, resource or sources roots
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Configure Prettier
+    1. PhpStorm/Webstorm: go to Settings | Languages & Frameworks | JavaScript | Prettier, and set:\
+       Prettier package: `${YOUR_PATH}\admin\node_modules\prettier`\
+       Run for files: {**/*,*}.{js,ts,jsx,tsx}
+    2. Set if necessary: On code reformat or On save for automatically code reformat.

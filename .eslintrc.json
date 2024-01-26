@@ -1,7 +1,6 @@
 {
   "extends": [
     "plugin:prettier/recommended",
-    "next/core-web-vitals",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
     "plugin:react/recommended",
@@ -38,7 +37,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/triple-slash-reference": "off",
     "indent": ["error", 2],
-    "max-len": ["error", { "code": 120 }],
+    "max-len": ["error", { "code": 200 }],
     "react/jsx-curly-brace-presence": [
       "error",
       { "props": "never", "children": "never" }

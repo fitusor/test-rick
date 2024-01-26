@@ -1,44 +1,48 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import CharactersList from "../CaractersList";
-import fetchCharacters from "../../api/characters/getCharacters";
-import useInfiniteScroll from "../../utils/useInfiniteScroll";
+import { useState, useEffect, FC } from 'react';
+import fetchCharacters, { FetchCharactersParams } from '../../api/characters/getCharacters';
+import useInfiniteScroll from '../../utils/useInfiniteScroll';
+import CharactersList from '../CaractersList';
 
-const Gallery = () => {
-	const [characters, setCharacters] = useState([]);
-	const [nextPage, setNextPage] = useState('https://rickandmortyapi.com/api/character/?page=1');
-	const [isLoading, setIsLoading] = useState(false);
-	const [displayCount, setDisplayCount] = useState(10);
-	const [fetchedCount, setFetchedCount] = useState(0);
-	
-	const fetch = useCallback(() => {
-		fetchCharacters(
-			nextPage,
-			isLoading,
-			setCharacters,
-			setFetchedCount,
-			setNextPage,
-			setIsLoading
-		);
-	}, [nextPage, isLoading]);
-	
-	const lastElementRef = useInfiniteScroll(
-		isLoading,
-		fetchedCount,
-		displayCount,
-		nextPage,
-		fetch,
-		setDisplayCount
-	);
-	
-	useEffect(() => {
-		fetch();
-	}, []);
-	
-	return (
-		<CharactersList characters={characters.slice(0, displayCount)}
-										lastElementRef={lastElementRef}
-		/>
-	);
+const Gallery: FC = () => {
+  const [characters, setCharacters] = useState<any[]>([]);
+  const [nextPage, setNextPage] = useState<string | null>('https://rickandmortyapi.com/api/character/?page=1');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [displayCount, setDisplayCount] = useState<number>(10);
+  const [fetchedCount, setFetchedCount] = useState<number>(0);
+
+  const fetch = () => {
+    const fetchParams: FetchCharactersParams = {
+      nextPage,
+      isLoading,
+      setCharacters,
+      setFetchedCount,
+      setNextPage,
+      setIsLoading,
+    };
+    fetchCharacters(fetchParams);
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log('Initial fetch useEffect!');
+    fetch();
+  }, []);
+
+  const lastElementRef = useInfiniteScroll({
+    isLoading,
+    fetchedCount,
+    displayCount,
+    nextPage,
+    fetch,
+    setDisplayCount,
+  });
+
+  return (
+    <CharactersList
+      characters={characters.slice(0, displayCount)}
+      lastElementRef={lastElementRef}
+    />
+  );
 };
 
 export default Gallery;
