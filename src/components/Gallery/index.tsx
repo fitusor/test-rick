@@ -23,8 +23,6 @@ const Gallery: FC = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('Initial fetch useEffect!');
     fetch();
   }, []);
 
