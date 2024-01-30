@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
+import { CharacterParams } from '../../types/characters';
 
 type CharacterProps = {
-  character: Record<string, any>;
+  character: CharacterParams;
   testId?: string;
 };
 

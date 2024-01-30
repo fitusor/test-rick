@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
-import './styles/global.css';
 import Main from '../src/components/Main';
+import './styles/global.css';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 if (!rootElement) throw new Error('Failed to find the root element');

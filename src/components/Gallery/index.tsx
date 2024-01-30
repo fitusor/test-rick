@@ -1,10 +1,11 @@
 import { useState, useEffect, FC } from 'react';
-import fetchCharacters, { FetchCharactersParams } from '../../api/characters/getCharacters';
+import fetchCharacters from '../../api/characters/getCharacters';
 import useInfiniteScroll from '../../utils/useInfiniteScroll';
 import CharactersList from '../CaractersList';
+import { CharacterParams, FetchCharactersParams } from '../../types/characters';
 
 const Gallery: FC = () => {
-  const [characters, setCharacters] = useState<any[]>([]);
+  const [characters, setCharacters] = useState<CharacterParams[] | []>([]);
   const [nextPage, setNextPage] = useState<string | null>('https://rickandmortyapi.com/api/character/?page=1');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [displayCount, setDisplayCount] = useState<number>(10);

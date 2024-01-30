@@ -1,14 +1,5 @@
 import axios from 'axios';
-import { Dispatch, SetStateAction } from 'react';
-
-export type FetchCharactersParams = {
-  nextPage: string | null;
-  isLoading: boolean;
-  setCharacters: Dispatch<SetStateAction<any[]>>;
-  setFetchedCount: Dispatch<SetStateAction<number>>;
-  setNextPage: Dispatch<SetStateAction<string | null>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-};
+import { FetchCharactersParams } from '../../types/characters';
 
 const fetchCharacters = async ({
   nextPage,

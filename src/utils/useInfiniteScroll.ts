@@ -1,13 +1,5 @@
-import { SetStateAction, useCallback, useRef } from 'react';
-
-export type UseInfiniteScrollParams = {
-  isLoading: boolean;
-  fetchedCount: number;
-  displayCount: number;
-  nextPage: string | null;
-  fetch: () => void;
-  setDisplayCount: (value: SetStateAction<number>) => void;
-};
+import { useCallback, useRef } from 'react';
+import { UseInfiniteScrollParams } from '../types/infinit_scroll';
 
 const useInfiniteScroll = ({
   isLoading,
@@ -22,7 +14,6 @@ const useInfiniteScroll = ({
   return useCallback(
     (node: Element | null) => {
       if (isLoading) return;
-
       if (observer.current) observer.current.disconnect();
 
       observer.current = new IntersectionObserver(
@@ -37,6 +28,7 @@ const useInfiniteScroll = ({
         },
         {
           rootMargin: '100px',
+          threshold: 0,
         },
       );
 
